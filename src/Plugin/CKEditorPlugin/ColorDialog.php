@@ -10,15 +10,20 @@ use Drupal\editor\Entity\Editor;
  *
  * @CKEditorPlugin(
  *   id = "colordialog",
- *   label = @Translation("Color Dialog"),
+ *   label = @Translation("CKEditor Color Dialog"),
  * )
  */
 class ColorDialog extends CKEditorPluginBase {
+
   /**
    * {@inheritdoc}
    */
   public function getFile() {
-    return 'libraries/colordialog/plugin.js';
+    $path = DRUPAL_ROOT . '/libraries/colordialog/plugin.js';
+    if (\Drupal::moduleHandler()->moduleExists('libraries')) {
+      $path = libraries_get_path('colordialog') . '/plugin.js';
+    }
+    return $path;
   }
 
   /**
@@ -34,4 +39,5 @@ class ColorDialog extends CKEditorPluginBase {
   public function getButtons() {
     return [];
   }
+
 }
