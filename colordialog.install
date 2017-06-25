@@ -11,11 +11,11 @@
 function colordialog_requirements($phase) {
   $requirements = [];
 
-
-  $path = DRUPAL_ROOT . '/libraries/colordialog/plugin.js';
+  $path = '/libraries/colordialog/plugin.js';
   if (\Drupal::moduleHandler()->moduleExists('libraries')) {
     $path = libraries_get_path('colordialog') . '/plugin.js';
   }
+  $path = DRUPAL_ROOT . '/' . $path;
 
   if (!file_exists($path)) {
     $requirements['colordialog'] = [
