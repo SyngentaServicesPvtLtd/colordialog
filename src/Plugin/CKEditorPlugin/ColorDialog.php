@@ -19,9 +19,9 @@ class ColorDialog extends CKEditorPluginBase {
    * {@inheritdoc}
    */
   public function getFile() {
-    $path = DRUPAL_ROOT . '/libraries/colordialog/plugin.js';
+    $path = '/libraries/colordialog/plugin.js';
     if (\Drupal::moduleHandler()->moduleExists('libraries')) {
-      $path = libraries_get_path('colordialog') . '/plugin.js';
+      $path = libraries_get_path('colordialog', TRUE) . '/plugin.js';
     }
     return $path;
   }
