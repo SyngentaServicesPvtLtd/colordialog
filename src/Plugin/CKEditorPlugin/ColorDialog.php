@@ -4,6 +4,7 @@ namespace Drupal\colordialog\Plugin\CKEditorPlugin;
 
 use Drupal\ckeditor\CKEditorPluginBase;
 use Drupal\editor\Entity\Editor;
+use Drupal\ckeditor\CKEditorPluginContextualInterface;
 
 /**
  * Defines the "colordialog" plugin.
@@ -13,7 +14,7 @@ use Drupal\editor\Entity\Editor;
  *   label = @Translation("CKEditor Color Dialog"),
  * )
  */
-class ColorDialog extends CKEditorPluginBase {
+class ColorDialog extends CKEditorPluginBase implements CKEditorPluginContextualInterface {
 
   /**
    * {@inheritdoc}
@@ -24,6 +25,13 @@ class ColorDialog extends CKEditorPluginBase {
       $path = libraries_get_path('colordialog', TRUE) . '/plugin.js';
     }
     return $path;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function isEnabled(Editor $editor) {
+    return TRUE;
   }
 
   /**
