@@ -11,11 +11,12 @@
 function colordialog_requirements($phase) {
   $requirements = [];
 
-  $path = '/libraries/colordialog/plugin.js';
-  if (\Drupal::moduleHandler()->moduleExists('libraries')) {
-    $path = libraries_get_path('colordialog') . '/plugin.js';
+  if (\Drupal::hasService('library.libraries_directory_file_finder')) {
+    $path = \Drupal::service('library.libraries_directory_file_finder')->find('colordialog/plugin.js');
   }
-  $path = DRUPAL_ROOT . '/' . $path;
+  else {
+    $path = DRUPAL_ROOT . '/libraries/colordialog/plugin.js';
+  }
 
   if (!file_exists($path)) {
     $requirements['colordialog'] = [
@@ -23,7 +24,7 @@ function colordialog_requirements($phase) {
       'value' => t('Plugin not detected'),
       'severity' => REQUIREMENT_ERROR,
       'description' => t('CKEditor Color Dialog requires the plugin.js library.
-       Download the plugin from http://ckeditor.com/addon/colordialog at least 
+       Download the plugin from http://ckeditor.com/addon/colordialog at least
        version 4.7.0, and place it in the libraries folder (/libraries/colordialog)'),
     ];
   }
